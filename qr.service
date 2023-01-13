@@ -1,0 +1,14 @@
+[Unit]
+Description=QR Server
+After=syslog.target network.target
+
+[Service]
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory = /var/www/qr
+ExecStart=/usr/bin/env python3 /var/www/qr/qr_server.py localhost 5000
+Restart=always
+
+[Target]
+Alias=qr.service

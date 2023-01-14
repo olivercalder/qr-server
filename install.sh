@@ -11,12 +11,20 @@ if [ "$(id -u)" -ne 0 ] ; then
     exit 0
 fi
 
-command -v qrencode > /dev/null && command -v python3 > /dev/null || {
-    command -v apt && apt-get install -y qrencode python3
-    command -v dnf && dnf install -y qrencode python3
-    command -v yum && yum install -y qrencode python3
-    command -v pacman && pacman -S qrencode python3
-}
+if ! command -v qrencode > /dev/null || ! command -v python3 > /dev/null ; then
+    if command -v apt ; then
+        apt-get install -y qrencode python3
+    elif command -v dnf ; then
+        dnf install -y qrencode python3
+    elif command -v yum ; then
+        yum install -y qrencode python3
+    elif command -v pacman ; then
+        pacman -S qrencode python3
+    else
+        echo "ERROR: Please install python3 and qrencode."
+        exit 1
+    fi
+fi
 
 /usr/bin/env python3 -m pip list 2> /dev/null | grep -i flask > /dev/null ||
     /usr/bin/env python3 -m pip install flask

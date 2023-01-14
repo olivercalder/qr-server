@@ -1,0 +1,15 @@
+[Unit]
+Description=QR Server
+After=syslog.target network.target
+
+[Service]
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory = SERVER_DIR
+ExecStart=/usr/bin/env python3 SERVER_DIR/SERVER_BIN SERVER_HOSTNAME SERVER_PORT
+Restart=always
+
+[Target]
+Alias=SERVICE_NAME
+WantedBy=multi-user.target

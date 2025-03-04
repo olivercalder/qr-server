@@ -1,0 +1,38 @@
+name: qr-server
+base: core24
+version: '0.1'
+summary: A server to generate QR codes
+description: |
+  Listen on a port and serve QR codes encoding the data after the hostname.
+  For example, if running on localhost, then http://localhost/hello-there
+  will create a QR code encoding the string hello-there.
+
+  By default, listens on port 5000. In the future, it may be possible to
+  change this, but it's not possible at the moment.
+
+icon: icon.png
+license: MIT
+source-code: https://github.com/olivercalder/qr
+
+grade: stable
+confinement: strict
+
+parts:
+  qr-server:
+    plugin: dump
+    source: .
+    stage-packages:
+      - qrencode
+
+  python-dependencies:
+    plugin: python
+    source: .
+    python-packages:
+      - flask
+
+apps:
+  qr-server:
+    command: qr_server.py localhost 5000
+    daemon: simple
+    plugs:
+      - network-bind

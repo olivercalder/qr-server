@@ -13,13 +13,11 @@ import flask
 import subprocess
 import io
 
-SERVER_NAME = 'qr.calder.dev'
-
 app = flask.Flask(__name__)
 
 @app.route('/')
 def home():
-    return f'Please include data following the slash in {SERVER_NAME.rstrip("/")}/'
+    return f'Please include data following the slash after the hostname[:port]'
 
 @app.route('/<path:path>')
 def render_path_as_qr(path):

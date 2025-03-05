@@ -10,9 +10,11 @@ description: |
   By default, listens on port 5000. In the future, it may be possible to
   change this, but it's not possible at the moment.
 
+title: QR Server
 icon: icon.png
 license: MIT
 source-code: https://github.com/olivercalder/qr
+website: https://github.com/olivercalder/qr
 
 grade: stable
 confinement: strict

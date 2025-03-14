@@ -22,7 +22,7 @@ confinement: strict
 parts:
   qr-server:
     plugin: dump
-    source: .
+    source: bin/
     stage-packages:
       - qrencode
 

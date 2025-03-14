@@ -7,8 +7,9 @@ description: |
   For example, if running on localhost, then http://localhost/hello-there
   will create a QR code encoding the string hello-there.
 
-  By default, listens on port 5000. In the future, it may be possible to
-  change this, but it's not possible at the moment.
+  By default, listens on port 5000. To listen on another port, use
+  `sudo snap set qr-server port=<port>`, with `<port>` being any available
+  port number.
 
 title: QR Server
 icon: icon.png

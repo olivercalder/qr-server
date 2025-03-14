@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Get new port value
+new_port="$(snapctl get port)"
+
+# Validate it
+if ! expr "$new_port" : '^[1-9][0-9]*$' > /dev/null; then
+    echo "\"$new_port\" is not a valid port number" >&2
+	exit 1
+fi
+
+snapctl restart qr-server

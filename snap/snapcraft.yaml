@@ -23,6 +23,9 @@ parts:
   qr-server:
     plugin: dump
     source: bin/
+    organize:
+      qr-server: bin/qr-server
+      qr_server.py: bin/qr_server.py
     stage-packages:
       - qrencode
 
@@ -34,7 +37,7 @@ parts:
 
 apps:
   qr-server:
-    command: qr_server.py localhost 5000
+    command: bin/qr-server
     daemon: simple
     plugs:
       - network-bind

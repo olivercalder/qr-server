@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+QR_PORT="5000"
+
+qr_server.py localhost "$QR_PORT"

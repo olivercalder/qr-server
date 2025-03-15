@@ -6,8 +6,9 @@
 # value, but if we're refreshing from a version which does not support a
 # configurable port to one which does, the install hook does not run, so the
 # configure hook would see the empty port setting and fail, reverting the
-# refresh. To avoid this, ensure that before the refresh occurs, a port is set,
-# so the configure hook triggered by the refresh will succeed as well.
+# refresh. To avoid this, ensure that after the refresh occurs, a port is set
+# for the new revision so the configure hook triggered by the refresh will
+# succeed as well.
 
 port="$(snapctl get port)"
 

@@ -4,7 +4,7 @@ version: '0.2.2'
 summary: A server to generate QR codes
 description: |
   Listen on a port and serve QR codes encoding the data after the hostname.
-  For example, if running on localhost, then http://localhost/hello-there
+  For example, if running on localhost, then http://localhost:5000/hello-there
   will create a QR code encoding the string hello-there.
 
   By default, listens on port 5000. To listen on another port, use
@@ -14,8 +14,9 @@ description: |
 title: QR Server
 icon: icon.png
 license: MIT
-source-code: https://github.com/olivercalder/qr
-website: https://github.com/olivercalder/qr
+source-code: https://github.com/olivercalder/qr-server
+website: https://github.com/olivercalder/qr-server
+issues: https://github.com/olivercalder/qr-server/issues
 
 grade: stable
 confinement: strict

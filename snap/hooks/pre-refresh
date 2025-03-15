@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+# Check if port value is currently unset, and if so, set to 5000.
+#
+# On a fresh install, the install hook should set the port to the default
+# value, but if we're refreshing from a version which does not support a
+# configurable port to one which does, the install hook does not run, so the
+# configure hook would see the empty port setting and fail, reverting the
+# refresh. To avoid this, ensure that before the refresh occurs, a port is set,
+# so the configure hook triggered by the refresh will succeed as well.
+
+port="$(snapctl get port)"
+
+if [ -z "$port" ]; then
+    snapctl set port=5000
+fi

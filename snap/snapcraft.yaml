@@ -1,6 +1,6 @@
 name: qr-server
 base: core24
-version: '0.2.2'
+version: '0.2.3'
 summary: A server to generate QR codes
 description: |
   Listen on a port and serve QR codes encoding the data after the hostname.

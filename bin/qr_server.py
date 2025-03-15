@@ -2,10 +2,9 @@
 '''
     qr_server.py
     Oliver Calder
-    1 March 2022
+    Created 1 March 2022
 
-    A simple QR generator server which renders a QR code given data following
-    the leading / of the path following the domain.
+    A simple server to generate QR codes for data following the / in the URL.
 '''
 import sys
 import argparse
@@ -27,7 +26,7 @@ def render_path_as_qr(path):
     return flask.send_file(io_result, mimetype='image/png')
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('A simple QR code generator API built using Flask.')
+    parser = argparse.ArgumentParser('A simple server to generate QR codes, built using Flask and qrencode.')
     parser.add_argument('host', help='the host on which this application is running')
     parser.add_argument('port', type=int, help='the port on which this application is listening')
     arguments = parser.parse_args()

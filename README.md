@@ -18,9 +18,14 @@ snap set qr-server port=<port>
 ```
 where `<port>` is any available port number.
 
-Requests to the API will return a png of a QR code encoding the data following the `/` in the URL. For example, if running the snap on a machine pointed to by a DNS record for `yourdomain.com`, then:
-```
-curl http://yourdomain.com:5000/hello-world
+Requests to the API will return a png of a QR code encoding the data following the `/` in the URL.
+For example, from the same machine on which `qr-server` is installed:
+```bash
+# Download png and save it to result.icon
+curl -o result.png http://localhost:5000/hello-world
+
+# Open the downloaded png with default handler
+xdg-open result.png
 ```
 will result in the following response:
 

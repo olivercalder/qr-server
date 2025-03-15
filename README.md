@@ -14,20 +14,12 @@ The [`qr-server` snap](https://snapcraft.io/qr-server) contains the `qr-server` 
 
 Once the snap is installed, it will listen on port 5000, though this can be configured
 ```
-snap set qr-server port=<port>
+sudo snap set qr-server port=<port>
 ```
 where `<port>` is any available port number.
 
 Requests to the API will return a png of a QR code encoding the data following the `/` in the URL.
-For example, from the same machine on which `qr-server` is installed:
-```bash
-# Download png and save it to result.icon
-curl -o result.png http://localhost:5000/hello-world
-
-# Open the downloaded png with default handler
-xdg-open result.png
-```
-will result in the following response:
+For example, from the same machine on which `qr-server` is installed, opening http://localhost:5000/hello-world in a browser should display the following:
 
 ![A QR code encoding the data "hello-world"](hello-world.png)
 
@@ -43,7 +35,7 @@ However, if you prefer to manually install and manage the service yourself, ensu
 
 Then, clone this repo, and from the project root, run:
 ```
-/usr/bin/env python3 bin/qr_server.py localhost 5000
+python3 bin/qr_server.py localhost 5000
 ```
 
 The hostname and port can be customized as desired.

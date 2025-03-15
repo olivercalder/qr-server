@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+# Initialize port to listen on
+snapctl set port=5000

@@ -1,14 +1,15 @@
 name: qr-server
 base: core24
-version: '0.1'
+version: '0.2'
 summary: A server to generate QR codes
 description: |
   Listen on a port and serve QR codes encoding the data after the hostname.
   For example, if running on localhost, then http://localhost/hello-there
   will create a QR code encoding the string hello-there.
 
-  By default, listens on port 5000. In the future, it may be possible to
-  change this, but it's not possible at the moment.
+  By default, listens on port 5000. To listen on another port, use
+  `sudo snap set qr-server port=<port>`, with `<port>` being any available
+  port number.
 
 title: QR Server
 icon: icon.png
@@ -22,7 +23,10 @@ confinement: strict
 parts:
   qr-server:
     plugin: dump
-    source: .
+    source: bin/
+    organize:
+      qr-server: bin/qr-server
+      qr_server.py: bin/qr_server.py
     stage-packages:
       - qrencode
 
@@ -34,7 +38,7 @@ parts:
 
 apps:
   qr-server:
-    command: qr_server.py localhost 5000
+    command: bin/qr-server
     daemon: simple
     plugs:
       - network-bind

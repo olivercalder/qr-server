@@ -29,6 +29,14 @@ source-code: https://github.com/olivercalder/qr-server
 website: https://github.com/olivercalder/qr-server
 issues: https://github.com/olivercalder/qr-server/issues
 
+platforms:
+  amd64:
+  arm64:
+  armhf:
+  ppc64el:
+  riscv64:
+  s390x:
+
 grade: stable
 confinement: strict
 

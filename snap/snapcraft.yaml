@@ -11,7 +11,7 @@ description: |
   "hello-there":
 
   - `curl http://localhost:5000/hello-there`
-  - `curl -d 'hello-there' http://localhost:5000`
+  - `curl --data-binary 'hello-there' http://localhost:5000`
 
   If the path following the hostname is non-empty, that will be used as the
   data to encode, and the request body will be ignored.

@@ -3,18 +3,24 @@ base: core24
 version: '0.2.3'
 summary: A server to generate QR codes
 description: |
-  Listen on a port and serve QR codes encoding the data after the hostname.
-  For example, if running on localhost, then http://localhost:5000/hello-there
-  will create a QR code encoding the string hello-there.
+  Listen on a port and serve QR codes encoding data from the path or the
+  request body.
 
-  Alternatively, the request body can be used as the data to encode by omitting
-  the path following the hostname. Both GET And POST requests are accepted.
-  For example: `curl -d 'some longer data' http://localhost:5000` will return a
-  QR code encoding "some longer data".
+  For example, if running on localhost and port 5000, then both of the
+  following are supported ways to generate a QR code encoding the string
+  "hello-there":
+
+  - `curl http://localhost:5000/hello-there`
+  - `curl -d 'hello-there' http://localhost:5000`
+
+  If the path following the hostname is non-empty, that will be used as the
+  data to encode, and the request body will be ignored.
 
   By default, listens on port 5000. To listen on another port, use
   `sudo snap set qr-server port=<port>`, with `<port>` being any available
   port number.
+
+  Both GET and POST requests are accepted and may be used interchangeably.
 
 title: QR Server
 icon: icon.png

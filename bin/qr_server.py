@@ -20,16 +20,16 @@ app = flask.Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 2953
 
 @app.route('/', methods=['GET', 'POST'])
-def home():
-    args = ['qrencode', '--output', '-', '--size', '10', '--margin', '2']
+def render_body_as_qr():
     data = flask.request.get_data(cache=False)
     if len(data) == 0:
-        return f'Please include data in the request body or following the slash after the hostname[:port]'
+        return 'Please include data in the request body or following the slash after the hostname[:port]', 400
+    args = ['qrencode', '--output', '-', '--size', '10', '--margin', '2']
     proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     io_result = io.BytesIO(proc.communicate(input=data)[0])
     return flask.send_file(io_result, mimetype='image/png')
 
-@app.route('/<path:path>')
+@app.route('/<path:path>', methods=['GET', 'POST'])
 def render_path_as_qr(path):
     args = ['qrencode', '--output', '-', '--size', '10', '--margin', '2', path]
     proc = subprocess.Popen(args, stdout=subprocess.PIPE)

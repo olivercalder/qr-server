@@ -7,6 +7,11 @@ description: |
   For example, if running on localhost, then http://localhost:5000/hello-there
   will create a QR code encoding the string hello-there.
 
+  Alternatively, the request body can be used as the data to encode by omitting
+  the path following the hostname. Both GET And POST requests are accepted.
+  For example: `curl -d 'some longer data' http://localhost:5000` will return a
+  QR code encoding "some longer data".
+
   By default, listens on port 5000. To listen on another port, use
   `sudo snap set qr-server port=<port>`, with `<port>` being any available
   port number.

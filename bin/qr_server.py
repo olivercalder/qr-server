@@ -15,9 +15,19 @@ import sys
 
 app = flask.Flask(__name__)
 
-@app.route('/')
+# Set the max content length to the maximum number of arbitrary bytes which can
+# be encoded in a QR code. See: https://www.qrcode.com/en/about/version.html
+app.config['MAX_CONTENT_LENGTH'] = 2953
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return f'Please include data following the slash after the hostname[:port]'
+    args = ['qrencode', '--output', '-', '--size', '10', '--margin', '2']
+    data = flask.request.get_data(cache=False)
+    if len(data) == 0:
+        return f'Please include data in the request body or following the slash after the hostname[:port]'
+    proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    io_result = io.BytesIO(proc.communicate(input=data)[0])
+    return flask.send_file(io_result, mimetype='image/png')
 
 @app.route('/<path:path>')
 def render_path_as_qr(path):
@@ -32,7 +42,5 @@ if __name__ == '__main__':
             description='A simple server to generate QR codes, built using Flask and qrencode.')
     parser.add_argument('host', help='the host on which this application is running')
     parser.add_argument('port', type=int, help='the port on which this application is listening')
-    parser.add_argument('--max-content-length', type=int, default=100, help='the maximum content length in request bodies, in MiB')
     arguments = parser.parse_args()
-    app.config['MAX_CONTENT_LENGTH'] = arguments.max_content_length * 1024 * 1024
     app.run(host=arguments.host, port=arguments.port)

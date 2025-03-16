@@ -18,10 +18,18 @@ sudo snap set qr-server port=<port>
 ```
 where `<port>` is any available port number.
 
-Requests to the API will return a png of a QR code encoding the data following the `/` in the URL.
+Requests to the API will return a png of a QR code encoding the data from either the request body or the path following the `/` in the URL.
+If the path following the hostname is non-empty, that will be used as the data to encode, and the request body will be ignored.
+
 For example, from the same machine on which `qr-server` is installed, opening http://localhost:5000/hello-world in a browser should display the following:
 
 ![A QR code encoding the data "hello-world"](hello-world.png)
+
+Equivalently, `curl` can be used to encode data from either the path or the request body:
+- `curl http://localhost:5000/hello-world`
+- `curl --data-binary 'hello-world' http://localhost:5000`
+
+Both `GET` and `POST` requests are accepted and may be used interchangeably.
 
 
 ## Manual Installation

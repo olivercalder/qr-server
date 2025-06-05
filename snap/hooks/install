@@ -8,6 +8,6 @@
 port="$(snapctl get port)"
 
 # Initialize port to listen on
-if [ -z "port" ]; then
+if [ -z "$port" ]; then
 	snapctl set port=5000
 fi
